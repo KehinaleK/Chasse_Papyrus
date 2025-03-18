@@ -1,0 +1,22 @@
+{
+    "type": "Feature",
+    "title": "Hagias Marias Monasterion",
+    "uri": "https://www.trismegistos.org/place/5606",
+    "TM_Geo_ID ": "5606",
+    "names": {
+        "greek": {
+            "name": "ἁγίας Μαρίας μοναστήριον",
+            "language": "200"
+        }
+    },
+    "links": {
+        "broad matches": [],
+        "close matches": [],
+        "exact matches": []
+    },
+    "properties": {
+        "status": "monastery: monasterion; oros; topos",
+        "country": "Egypt",
+        "provincia": "Aegyptus"
+    }
+}

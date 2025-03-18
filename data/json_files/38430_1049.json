@@ -1,0 +1,40 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            31.194872,
+            29.442956
+        ]
+    },
+    "title": "Kerke",
+    "uri": "https://www.trismegistos.org/place/1049",
+    "TM_Geo_ID ": "1049",
+    "names": {
+        "greek": {
+            "name": "Κερκη",
+            "language": "200"
+        }
+    },
+    "links": {
+        "broad matches": [],
+        "close matches": {
+            "Pleiades": [
+                {
+                    "URI": "https://pleiades.stoa.org/places/736935"
+                }
+            ],
+            "Digital Atlas of the Roman Empire": [
+                {
+                    "URI": "http://imperium.ahlfeldt.se/places/28559"
+                }
+            ]
+        },
+        "exact matches": []
+    },
+    "properties": {
+        "status": "village: kome; harbour: hormos",
+        "country": "Egypt",
+        "provincia": "Aegyptus"
+    }
+}

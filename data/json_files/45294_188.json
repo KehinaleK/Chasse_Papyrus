@@ -1,0 +1,58 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            31.517443,
+            26.8992835
+        ]
+    },
+    "title": "Antaiopolis",
+    "uri": "https://www.trismegistos.org/place/188",
+    "TM_Geo_ID ": "188",
+    "names": {
+        "greek": {
+            "name": "Ἀνταίου πόλις - Ἀνταιοπολιτῶν πόλις",
+            "language": "200"
+        },
+        "coptic": {
+            "name": "ⲧⲕⲱⲟⲩ - ⲧⲕⲟⲟⲩ",
+            "language": "070"
+        },
+        "latin": {
+            "name": "Anteu",
+            "language": "215"
+        }
+    },
+    "links": {
+        "broad matches": [],
+        "close matches": {
+            "Pleiades": [
+                {
+                    "URI": "https://pleiades.stoa.org/places/756515"
+                }
+            ],
+            "Wikipedia": [
+                {
+                    "URI": "https://en.wikipedia.org/wiki/Tjebu"
+                }
+            ],
+            "Digital Atlas of the Roman Empire": [
+                {
+                    "URI": "http://imperium.ahlfeldt.se/places/22146"
+                }
+            ],
+            "ToposText": [
+                {
+                    "URI": "https://topostext.org/place/268315UAnt"
+                }
+            ]
+        },
+        "exact matches": []
+    },
+    "properties": {
+        "status": "city: polis, metropolis; village: kome",
+        "country": "Egypt",
+        "provincia": "Aegyptus"
+    }
+}

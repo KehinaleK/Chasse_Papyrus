@@ -1,0 +1,22 @@
+{
+    "type": "Feature",
+    "title": "Abba Michael Topos",
+    "uri": "https://www.trismegistos.org/place/5775",
+    "TM_Geo_ID ": "5775",
+    "names": {
+        "greek": {
+            "name": "Ἀββᾶ Μιχαὴλ τόπος",
+            "language": "200"
+        }
+    },
+    "links": {
+        "broad matches": [],
+        "close matches": [],
+        "exact matches": []
+    },
+    "properties": {
+        "status": "topos",
+        "country": "Egypt",
+        "provincia": "Aegyptus"
+    }
+}

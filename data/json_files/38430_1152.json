@@ -1,0 +1,44 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            31.168106,
+            29.303135
+        ]
+    },
+    "title": "Koma",
+    "uri": "https://www.trismegistos.org/place/1152",
+    "TM_Geo_ID ": "1152",
+    "names": {
+        "greek": {
+            "name": "Κομα - Κωμα",
+            "language": "200"
+        },
+        "latin": {
+            "name": "Coma",
+            "language": "215"
+        }
+    },
+    "links": {
+        "broad matches": [],
+        "close matches": {
+            "Pleiades": [
+                {
+                    "URI": "https://pleiades.stoa.org/places/736945"
+                }
+            ],
+            "Digital Atlas of the Roman Empire": [
+                {
+                    "URI": "http://imperium.ahlfeldt.se/places/28567"
+                }
+            ]
+        },
+        "exact matches": []
+    },
+    "properties": {
+        "status": "village: kome, chorion",
+        "country": "Egypt",
+        "provincia": "Aegyptus"
+    }
+}

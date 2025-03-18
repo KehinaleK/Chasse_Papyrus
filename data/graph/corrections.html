@@ -1,0 +1,168 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 800;
+                 height: 800px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03b1", "label": "\u03b1", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bf", "label": "\u0027\u03bf\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bf\u03bd", "label": "\u0027\u03bf\u03bd\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b5", "label": "\u0027\u03b5\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c9", "label": "\u0027\u03c9\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b7", "label": "\u0027\u03b7\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b9", "label": "\u0027\u03b9\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bf\u03c5", "label": "\u0027\u03bf\u03c5\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c5", "label": "\u0027\u03c5\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c9\u03bd", "label": "\u0027\u03c9\u03bd\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b7\u03bd", "label": "\u0027\u03b7\u03bd\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b5\u03c4", "label": "\u0027\u03b5\u03c4\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03c2", "label": "\u03c2", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bd", "label": "\u0027\u03bd\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b5\u03b9", "label": "\u0027\u03b5\u03b9\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c4", "label": "\u0027\u03c4\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c5\u03c7", "label": "\u0027\u03c5\u03c7\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bc", "label": "\u0027\u03bc\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03b4", "label": "\u03b4", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b9\u03b8", "label": "\u0027\u03b9\u03b8\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b6", "label": "\u0027\u03b6\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b1\u03b9", "label": "\u0027\u03b1\u03b9\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bf\u03b9", "label": "\u0027\u03bf\u03b9\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c9\u03c2", "label": "\u0027\u03c9\u03c2\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03ba", "label": "\u0027\u03ba\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u2019", "label": "\u0027\u2019\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c1", "label": "\u0027\u03c1\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bb", "label": "\u0027\u03bb\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03bf\u03c2", "label": "\u0027\u03bf\u03c2\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03b3", "label": "\u03b3", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b9\u03c2", "label": "\u0027\u03b9\u03c2\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b8", "label": "\u0027\u03b8\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c3", "label": "\u0027\u03c3\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03c7", "label": "\u03c7", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03ba\u2019", "label": "\u0027\u03ba\u2019\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03c0", "label": "\u03c0", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c6", "label": "\u0027\u03c6\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u03c8", "label": "\u03c8", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03a8", "label": "\u0027\u03a8\u0027", "shape": "dot", "size": 10}, {"color": "pink", "font": {"color": "white"}, "id": "\u03c3\u03b5", "label": "\u0027\u03c3\u03b5\u0027", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u02bc", "label": "\u02bc", "shape": "dot", "size": 20}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u0392", "label": "\u0392", "shape": "dot", "size": 20}, {"color": "pink", "font": {"color": "white"}, "id": "\u03b2", "label": "\u0027\u03b2\u0027", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "\u03b1", "title": "corrections : 11", "to": "\u03bf", "value": 11}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 2", "to": "\u03bf\u03bd", "value": 2}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 8", "to": "\u03b5", "value": 8}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 3", "to": "\u03c9", "value": 3}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 8", "to": "\u03b7", "value": 8}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 1", "to": "\u03b9", "value": 1}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 2", "to": "\u03bf\u03c5", "value": 2}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 2", "to": "\u03c5", "value": 2}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 3", "to": "\u03c9\u03bd", "value": 3}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 1", "to": "\u03b7\u03bd", "value": 1}, {"arrows": "to", "from": "\u03b1", "title": "corrections : 1", "to": "\u03b5\u03c4", "value": 1}, {"arrows": "to", "from": "\u03c2", "title": "corrections : 17", "to": "\u03bd", "value": 17}, {"arrows": "to", "from": "\u03c2", "title": "corrections : 10", "to": "\u03c5", "value": 10}, {"arrows": "to", "from": "\u03c2", "title": "corrections : 2", "to": "\u03b9", "value": 2}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 121", "to": "\u03c9", "value": 121}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 18", "to": "\u03b1", "value": 18}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 6", "to": "\u03b5", "value": 6}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 1", "to": "\u03b5\u03b9", "value": 1}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 1", "to": "\u03c4", "value": 1}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 2", "to": "\u03c5\u03c7", "value": 2}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 3", "to": "\u03b7", "value": 3}, {"arrows": "to", "from": "\u03bf", "title": "corrections : 1", "to": "\u03bc", "value": 1}, {"arrows": "to", "from": "\u03b4", "title": "corrections : 66", "to": "\u03c4", "value": 66}, {"arrows": "to", "from": "\u03b4", "title": "corrections : 1", "to": "\u03b9\u03b8", "value": 1}, {"arrows": "to", "from": "\u03b4", "title": "corrections : 1", "to": "\u03b6", "value": 1}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 21", "to": "\u03b7", "value": 21}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 7", "to": "\u03b1", "value": 7}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 21", "to": "\u03b1\u03b9", "value": 21}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 8", "to": "\u03b9", "value": 8}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 5", "to": "\u03c5", "value": 5}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 1", "to": "\u03b4", "value": 1}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 1", "to": "\u03bf\u03b9", "value": 1}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 5", "to": "\u03bf", "value": 5}, {"arrows": "to", "from": "\u03b5", "title": "corrections : 1", "to": "\u03bf\u03c5", "value": 1}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 3", "to": "\u03bc", "value": 3}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 3", "to": "\u03c2", "value": 3}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 2", "to": "\u03c9\u03c2", "value": 2}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 10", "to": "\u03b7", "value": 10}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 6", "to": "\u03b5", "value": 6}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 1", "to": "\u03ba", "value": 1}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 1", "to": "\u03b1", "value": 1}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 3", "to": "\u03c5", "value": 3}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 1", "to": "\u2019", "value": 1}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 3", "to": "\u03bd", "value": 3}, {"arrows": "to", "from": "\u03b9", "title": "corrections : 1", "to": "\u03c1", "value": 1}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 4", "to": "\u03bd", "value": 4}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 14", "to": "\u03b9", "value": 14}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 16", "to": "\u03c2", "value": 16}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 1", "to": "\u03b1\u03b9", "value": 1}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 17", "to": "\u03b7", "value": 17}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 6", "to": "\u03b5", "value": 6}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 2", "to": "\u03c9", "value": 2}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 4", "to": "\u03bb", "value": 4}, {"arrows": "to", "from": "\u03c5", "title": "corrections : 1", "to": "\u03b1", "value": 1}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 143", "to": "\u03bf", "value": 143}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 7", "to": "\u03b1", "value": 7}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 14", "to": "\u03bf\u03c5", "value": 14}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 1", "to": "\u03b5\u03b9", "value": 1}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 2", "to": "\u03bf\u03bd", "value": 2}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 1", "to": "\u03b1\u03b9", "value": 1}, {"arrows": "to", "from": "\u03c9", "title": "corrections : 1", "to": "\u03c5", "value": 1}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 36", "to": "\u03b5", "value": 36}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 19", "to": "\u03b1", "value": 19}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 15", "to": "\u03b9", "value": 15}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 11", "to": "\u03c5", "value": 11}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 7", "to": "\u03bf\u03b9", "value": 7}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 2", "to": "\u03b1\u03b9", "value": 2}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 4", "to": "\u03b5\u03b9", "value": 4}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 3", "to": "\u03bf", "value": 3}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 1", "to": "\u03bf\u03c2", "value": 1}, {"arrows": "to", "from": "\u03b7", "title": "corrections : 1", "to": "\u03bf\u03c5", "value": 1}, {"arrows": "to", "from": "\u03b3", "title": "corrections : 8", "to": "\u03ba", "value": 8}, {"arrows": "to", "from": "\u03b3", "title": "corrections : 1", "to": "\u03bd", "value": 1}, {"arrows": "to", "from": "\u03bd", "title": "corrections : 8", "to": "\u03c2", "value": 8}, {"arrows": "to", "from": "\u03bd", "title": "corrections : 3", "to": "\u03bc", "value": 3}, {"arrows": "to", "from": "\u03bd", "title": "corrections : 1", "to": "\u03b9\u03c2", "value": 1}, {"arrows": "to", "from": "\u03bd", "title": "corrections : 1", "to": "\u03c5", "value": 1}, {"arrows": "to", "from": "\u03bd", "title": "corrections : 1", "to": "\u03c4", "value": 1}, {"arrows": "to", "from": "\u03bd", "title": "corrections : 1", "to": "\u03b9", "value": 1}, {"arrows": "to", "from": "\u03c4", "title": "corrections : 39", "to": "\u03b8", "value": 39}, {"arrows": "to", "from": "\u03c4", "title": "corrections : 20", "to": "\u03b4", "value": 20}, {"arrows": "to", "from": "\u03c4", "title": "corrections : 1", "to": "\u03c3", "value": 1}, {"arrows": "to", "from": "\u03bc", "title": "corrections : 2", "to": "\u03bd", "value": 2}, {"arrows": "to", "from": "\u03ba", "title": "corrections : 13", "to": "\u03b3", "value": 13}, {"arrows": "to", "from": "\u03bb", "title": "corrections : 1", "to": "\u03c1", "value": 1}, {"arrows": "to", "from": "\u03bb", "title": "corrections : 1", "to": "\u03b9", "value": 1}, {"arrows": "to", "from": "\u03c3", "title": "corrections : 9", "to": "\u03b6", "value": 9}, {"arrows": "to", "from": "\u03c3", "title": "corrections : 2", "to": "\u03bc", "value": 2}, {"arrows": "to", "from": "\u03c3", "title": "corrections : 1", "to": "\u03c4", "value": 1}, {"arrows": "to", "from": "\u03b8", "title": "corrections : 6", "to": "\u03c4", "value": 6}, {"arrows": "to", "from": "\u03b8", "title": "corrections : 1", "to": "\u03b4", "value": 1}, {"arrows": "to", "from": "\u03b8", "title": "corrections : 1", "to": "\u03c3", "value": 1}, {"arrows": "to", "from": "\u03b8", "title": "corrections : 1", "to": "\u03ba", "value": 1}, {"arrows": "to", "from": "\u03c7", "title": "corrections : 2", "to": "\u03ba\u2019", "value": 2}, {"arrows": "to", "from": "\u03c7", "title": "corrections : 3", "to": "\u03ba", "value": 3}, {"arrows": "to", "from": "\u03c0", "title": "corrections : 4", "to": "\u03c6", "value": 4}, {"arrows": "to", "from": "\u03c8", "title": "corrections : 1", "to": "\u03a8", "value": 1}, {"arrows": "to", "from": "\u03c8", "title": "corrections : 2", "to": "\u03c6", "value": 2}, {"arrows": "to", "from": "\u03b6", "title": "corrections : 1", "to": "\u03c3\u03b5", "value": 1}, {"arrows": "to", "from": "\u03c1", "title": "corrections : 2", "to": "\u03bb", "value": 2}, {"arrows": "to", "from": "\u02bc", "title": "corrections : 5", "to": "\u2019", "value": 5}, {"arrows": "to", "from": "\u03c6", "title": "corrections : 1", "to": "\u03c0", "value": 1}, {"arrows": "to", "from": "\u03c6", "title": "corrections : 1", "to": "\u03bc", "value": 1}, {"arrows": "to", "from": "\u0392", "title": "corrections : 2", "to": "\u03b2", "value": 2}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

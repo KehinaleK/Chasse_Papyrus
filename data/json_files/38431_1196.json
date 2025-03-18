@@ -1,0 +1,53 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            30.782897,
+            28.479495
+        ]
+    },
+    "title": "Kynopolis",
+    "uri": "https://www.trismegistos.org/place/1196",
+    "TM_Geo_ID ": "1196",
+    "names": {
+        "greek": {
+            "name": "Κυνῶν πόλις",
+            "language": "200"
+        },
+        "coptic": {
+            "name": "ⲕⲁⲓⲥ - ⲕⲟⲉⲓⲥ",
+            "language": "070"
+        },
+        "latin": {
+            "name": "Canum",
+            "language": "215"
+        }
+    },
+    "links": {
+        "broad matches": [],
+        "close matches": {
+            "Pleiades": [
+                {
+                    "URI": "https://pleiades.stoa.org/places/736949"
+                }
+            ],
+            "Digital Atlas of the Roman Empire": [
+                {
+                    "URI": "http://imperium.ahlfeldt.se/places/28569"
+                }
+            ],
+            "ToposText": [
+                {
+                    "URI": "https://topostext.org/place/284307UKyn"
+                }
+            ]
+        },
+        "exact matches": []
+    },
+    "properties": {
+        "status": "city: polis, metropolis",
+        "country": "Egypt",
+        "provincia": "Aegyptus"
+    }
+}
